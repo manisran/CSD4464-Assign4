@@ -17,8 +17,13 @@
 package servlet;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import model.Account;
 
 
 /**
@@ -26,5 +31,29 @@ import javax.servlet.http.HttpServlet;
  */
 @WebServlet("/account")
 public class AccountServlet extends HttpServlet {
+    private Account account = new Account();
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response){
+        try(PrintWriter out = response.getWriter()){
+            out.println(account.getBalance());
+        }
+        catch(IOException ex){
+            System.err.println("Something went wrong: " + ex.getMessage());
+        }
+    }
+    @Override
+     protected void doPost(HttpServletRequest request, HttpServletResponse response){
+         String deposit = request.getParameter("deposit");
+         double deposit1 = Double.parseDouble(deposit);
+        // double desposit = Double.parseDouble(request.getParameter("deposit"));
+         account.deposit(deposit1);
+        try(PrintWriter out = response.getWriter()){
+            out.println(account.getBalance());
+        }
+        catch(IOException ex){
+            System.err.println("Something went wrong: " + ex.getMessage());
+        }
+    }
    
 }
