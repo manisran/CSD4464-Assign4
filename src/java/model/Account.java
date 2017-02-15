@@ -28,7 +28,7 @@ public class Account {
      * @return - the balance
      */ double balance;
     public double getBalance() {
-        return -999;
+        return balance;
     }
     
     /**
@@ -36,6 +36,7 @@ public class Account {
      * @param cash - the cash to deposit
      */
     public void deposit(double cash) {
+        balance=balance+cash;
         
         
     }
@@ -45,7 +46,7 @@ public class Account {
      * @param cash - the cash to withdraw
      */
     public void withdraw(double cash) {
-        
+        balance=balance-cash;
     
     }
     
@@ -53,6 +54,6 @@ public class Account {
      * Deducts all cash from the total balance of the account
      */
     public void close() {
-        
+        balance=0.00;
     }
 }
